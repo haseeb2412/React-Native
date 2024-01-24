@@ -1,4 +1,4 @@
-import { View, Text ,Image,TextInput,TouchableOpacity} from 'react-native'
+import { View, Text ,Image,TextInput,TouchableOpacity, ImageBackground} from 'react-native'
 import React from 'react'
 import COLORS from '../constants/colors';
 import {LinearGradient} from 'expo-linear-gradient';
@@ -8,10 +8,11 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 export default function ProfileScreen() {
   return (
     <>
-    <LinearGradient
+    <ImageBackground source={require('../assets/images/background.png')}>
+    {/* <LinearGradient
 colors={[COLORS.primary, COLORS.secondary]}  // Add your two colors here
 style={{ flex: 1 }}
->
+> */}
 
   {/* top section */}
 
@@ -25,7 +26,7 @@ style={{ flex: 1 }}
     <Image style={{width:50,height:50}} source={require('../assets/images/newhero01.png')}/>
 
 <Text style={{
-    fontFamily:'AveriaSerifLibre-Italic',
+    // fontFamily:'AveriaSerifLibre-Italic',
     color:'#450920',fontSize:31,}}
     className=" font-bold  text-center">
     MyTime
@@ -206,17 +207,17 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
 
 
 
-</LinearGradient>
+{/* </LinearGradient> */}
 
 <View 
   style={{
     width:394,
-  height:75,flexShrink:0,backgroundColor:'#FFEDDF99'
+  height:40,flexShrink:0,backgroundColor:'#FFEDDF99'
 }}
   >
-    <SafeAreaView style={{display:'flex',flexDirection:'row',gap:40,alignSelf:'center'}}>
+    <SafeAreaView style={{display:'flex',flexDirection:'row',gap:50,alignSelf:'center'}}>
     <Image style={{width:50,height:40}} source={require('../assets/images/bellIcon.png')}/>
-    <Image style={{width:80,height:80}} source={require('../assets/images/newhero01.png')}/>
+    <Image style={{width:68,height:68,overflow:'visible',position:'relative',top:-25}} source={require('../assets/images/newhero01.png')}/>
     <Image style={{width:50,height:40}} source={require('../assets/images/contact.png')}/>
 
  
@@ -227,7 +228,7 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
 
 
 
-
+  </ImageBackground>
 
 </>
 
