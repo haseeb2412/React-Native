@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 export default function ProfileScreen() {
   return (
     <>
-    <ImageBackground source={require('../assets/images/background.png')}>
+    <ImageBackground source={require('../assets/images/background.png')} style={{height:800}}>
     {/* <LinearGradient
 colors={[COLORS.primary, COLORS.secondary]}  // Add your two colors here
 style={{ flex: 1 }}
@@ -212,16 +212,18 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
 <View 
   style={{
     width:394,
+    position:'absolute',
+    bottom:0,
+    zIndex:2,
   height:40,flexShrink:0,backgroundColor:'#FFEDDF99'
 }}
   >
     <SafeAreaView style={{display:'flex',flexDirection:'row',gap:50,alignSelf:'center'}}>
     <Image style={{width:50,height:40}} source={require('../assets/images/bellIcon.png')}/>
     <Image style={{width:68,height:68,overflow:'visible',position:'relative',top:-25}} source={require('../assets/images/newhero01.png')}/>
-    <Image style={{width:50,height:40}} source={require('../assets/images/contact.png')}/>
+    <Image style={{width:50,height:40,marginLeft:15}} source={require('../assets/images/contact.png')}/>
 
  
-{/* <Image  style={{width:70,height:60,left:50,}} source={require('../assets/images/newremove.png')}/> */}
 
     </SafeAreaView>
   </View>

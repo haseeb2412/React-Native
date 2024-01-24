@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, Image, TextInput ,ImageBackground} from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {ArrowLeftIcon} from 'react-native-heroicons/solid'
@@ -81,12 +81,15 @@ export default function LoginScreen() {
     // </View>
 
 
+    // <ImageBackground source={require('../assets/images/background.png')} style={{width:400,height:800}}>
+
+
 
 
 <LinearGradient
 colors={[COLORS.primary, COLORS.secondary]}  // Add your two colors here
 style={{ flex: 1 }}
->
+> 
 <SafeAreaView className="flex-1" style={{}}>
 <View className="flex-1 flex justify-around my-4">
     <View className='haseeb' style={{display:"flex",alignItems:"center",flexDirection:"row",justifyContent:"center",color:'white'}}>
@@ -147,7 +150,7 @@ style={{ flex: 1 }}
               height:57,
               flexShrink:0,
               borderRadius:20,
-              backgroundColor:'rgba(69, 9, 32, 0.35)',
+              backgroundColor:'#45092059',
               marginLeft:30,
               color:'white',
               marginBottom:-3 ,
