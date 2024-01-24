@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ImageBackground,StyleSheet } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { themeColors } from './Theme/Index'
@@ -96,7 +96,7 @@ export default function WelcomeScreen() {
             <View className="flex-row justify-center">
                 <Text className="font-semibold"
                 style={{color:'#450920'}}>Get Started With Ease..!</Text>
-                <TouchableOpacity onPress={()=> navigation.navigate('Login')}>
+                <TouchableOpacity onPress={()=> navigation.navigate('SignUp')}>
                     <Text className="font-bold text-yellow-400" style={{color:'#FFEDDF'}}> SignUp</Text>
                 </TouchableOpacity>
             </View>
