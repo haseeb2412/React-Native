@@ -30,10 +30,12 @@ style={{ flex: 1 }}
         <Image  source={require('../assets/images/newhero01.png')}/>
 
         <Text style={{
-            // fontFamily:'AveriaSerifLibre-Italic',
+            fontFamily:'Light',
+            fontSize:40,
+                fontWeight:400,
             marginBottom:0,
             color:'#450920'}}
-            className=" font-bold text-4xl text-center">
+            className=" font-semibold text-4xl text-center">
             MyTime
         </Text>
     </View>    
@@ -41,7 +43,7 @@ style={{ flex: 1 }}
         <Image source={require("../assets/images/img01.png")}
             style={{width: 300, height: 300,}} />
     </View>
-    <View className="space-y-4">
+    <View className="space-y-4 font-semibold">
         <Text style={{
                 display: 'flex',
                 width: 180,
@@ -51,10 +53,9 @@ style={{ flex: 1 }}
                 flexShrink: 0,
                 color: '#FFEDDF',
                 textAlign: 'center',
-                // fontFamily: "Averia Serif Libre",
-                fontSize: 32,
+                fontFamily:'Light',
+                fontSize: 37,
                 fontStyle: 'normal',
-                fontWeight: 700,
                 marginTop:0,
                 marginLeft:100,
               }}
@@ -65,15 +66,14 @@ style={{ flex: 1 }}
 
 
 <View className="form space-y-2">
-            <Text className="text-gray-700 ml-4"
+            <Text className="text-gray-700 ml-4 font-semibold"
             style={{
               marginTop:-30,
               color: '#FFEDDF',
               textAlign: 'center',
-              // fontFamily: "Averia Serif Libre",
-              fontSize: 20,
+              fontFamily:'Light',
+              fontSize: 25,
               fontStyle: 'normal',
-              fontWeight: 700,
               marginLeft:-260,
             }}
             
@@ -87,20 +87,21 @@ style={{ flex: 1 }}
               marginLeft:30,
               color:'white',
               marginBottom:-3 ,
+              fontFamily:'Light',
+              fontSize:20,
             }}
               className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
               placeholder="Enter Your Email"
               // value="john@gmail.com" 
             />
-            <Text className="text-gray-700 ml-4"
+            <Text className="text-gray-700 ml-4 font-semibold "
             style={{
               color: '#FFEDDF',
               textAlign: 'center',
-              // fontFamily: "Averia Serif Libre",
-              fontSize: 20,
+              fontFamily:'Light',
+              fontSize: 25,
               fontStyle: 'normal',
-              fontWeight: 700,
-              marginLeft:-230,
+              marginLeft:-220,
             }}
             >Password</Text>
             <TextInput 
@@ -109,13 +110,14 @@ style={{ flex: 1 }}
               height:57,
               flexShrink:0,
               borderRadius:20,
+              fontFamily:'Light',
               backgroundColor:'rgba(69, 9, 32, 0.35)',
               marginLeft:30,
-              color:'white',
+              fontSize:20,
             }}
-              className="p-4 bg-gray-100 text-gray-700 rounded-2xl"
+              className="p-4  rounded-2xl"
               secureTextEntry
-              placeholder="password"
+              placeholder="Password"
             />
             <TouchableOpacity 
               className="py-3 "
@@ -153,9 +155,9 @@ style={{ flex: 1 }}
 
           <View className="flex-row justify-center">
                 <Text className="font-semibold"
-                style={{color:'#450920',marginLeft:-30,}}>Already Have An Account?</Text>
+                style={{color:'#450920',marginLeft:-30,fontFamily:'Light',fontSize:20,}}>Already Have An Account?</Text>
                 <TouchableOpacity onPress={()=> navigation.navigate('Login')}>
-                    <Text className="font-bold text-yellow-400" style={{color:'#FFFFFF'}}> Login</Text>
+                    <Text className="font-semibold text-yellow-400" style={{color:'#FFFFFF',fontFamily:'Light',fontSize:20,}}> Login</Text>
                 </TouchableOpacity>
             </View>
 

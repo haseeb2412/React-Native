@@ -1,20 +1,26 @@
 import { View, Text ,Image,TextInput,TouchableOpacity, ImageBackground} from 'react-native'
 import React from 'react'
-import COLORS from '../constants/colors';
-import {LinearGradient} from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context'
+import AppLoading from 'expo-app-loading'
+import { useFonts } from 'expo-font'
 
 
 export default function ProfileScreen() {
+  let [fontLoaded]=useFonts({
+    'Italic':require('../assets/fonts/AveriaSerifLibre-BoldItalic.ttf'),
+    'LightItalic':require('../assets/fonts/AveriaSerifLibre-LightItalic.ttf'),
+    'Light':require('../assets/fonts/AveriaSerifLibre-Light.ttf')
+    
+  })
+
+
+  if(!fontLoaded){
+    return <AppLoading/>
+  }
   return (
     <>
     <ImageBackground source={require('../assets/images/background.png')} style={{height:800}}>
-    {/* <LinearGradient
-colors={[COLORS.primary, COLORS.secondary]}  // Add your two colors here
-style={{ flex: 1 }}
-> */}
 
-  {/* top section */}
 
   <View 
   style={{
@@ -26,9 +32,11 @@ style={{ flex: 1 }}
     <Image style={{width:50,height:50}} source={require('../assets/images/newhero01.png')}/>
 
 <Text style={{
-    // fontFamily:'AveriaSerifLibre-Italic',
-    color:'#450920',fontSize:31,}}
-    className=" font-bold  text-center">
+    marginTop:3,
+    color:'#450920',fontSize:40,
+    fontFamily:'Light',
+  }}
+    className="   text-center">
     MyTime
 </Text>
  
@@ -76,11 +84,13 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
               flexShrink:0,
               backgroundColor:'#A6435C',
               borderRadius:20,
-              fontSize:18,
-              alignSelf:'center'
+              fontSize:22,
+              alignSelf:'center',
+              fontFamily:'Light',
+              // fontWeight:400,
             }}
               // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
-              className="myhaseeb text-white  font-bold rounded-2xl"
+              className="myhaseeb text-white  font-semibold rounded-2xl"
               placeholder="Name"
               value="Name" 
             />
@@ -96,10 +106,12 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
               backgroundColor:'#A6435C',
               borderRadius:20,
               fontSize:18,
-              alignSelf:'center'
+              fontSize:22,
+              alignSelf:'center',
+              fontFamily:'Light',
             }}
               // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
-              className="myhaseeb text-white  font-bold rounded-2xl"
+              className="myhaseeb text-white  font-semibold rounded-2xl"
               placeholder="Specialization"
               value="Specialization" 
             />
@@ -114,11 +126,11 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
               flexShrink:0,
               backgroundColor:'#A6435C',
               borderRadius:20,
+              fontSize:22,
               alignSelf:'center',
-              fontSize:18,
+              fontFamily:'Light',
             }}
-              // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
-              className="myhaseeb text-white font-bold rounded-2xl "
+              className="myhaseeb text-white font-semibold rounded-2xl "
               placeholder="Institute"
               value="Institute" 
             />
@@ -133,11 +145,12 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
               flexShrink:0,
               backgroundColor:'#A6435C',
               borderRadius:20,
+              fontSize:22,
               alignSelf:'center',
-              fontSize:18,
+              fontFamily:'Light',
             }}
               // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
-              className="myhaseeb text-white font-bold rounded-2xl"
+              className="myhaseeb text-white font-semibold rounded-2xl"
               placeholder="Department"
               value="Department" 
             />
@@ -160,10 +173,10 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
             // marginLeft:60,
             flexShrink:0}}>
             <Text 
-                className=" font-bold text-center " style={{ 
-                    fontFamily:'AveriaSerifLibre-Italic',
-                    color:'#E7D1D1',fontWeight:'700',
-                    fontSize:16,
+                className=" font-semibold text-center " style={{ 
+                  fontSize:22,
+                  fontFamily:'Light',
+                    color:'#E7D1D1',
                 }}
             >
                 Edit
@@ -179,10 +192,10 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
             // marginLeft:60,
             flexShrink:0}}>
             <Text 
-                className=" font-bold text-center " style={{ 
-                    fontFamily:'AveriaSerifLibre-Italic',
-                    color:'#E7D1D1',fontWeight:'700',
-                    fontSize:16,
+                className=" font-semibold text-center " style={{ 
+                  fontSize:22,
+                  fontFamily:'Light',
+                    color:'#E7D1D1',
                 }}
             >
                 Save

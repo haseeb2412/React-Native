@@ -1,10 +1,22 @@
 import { View, Text ,Image,TextInput,TouchableOpacity,ImageBackground} from 'react-native'
 import React from 'react'
-import COLORS from '../constants/colors';
-import {LinearGradient} from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context'
+import AppLoading from 'expo-app-loading'
+import { useFonts } from 'expo-font'
+
 
 export default function MyProfile() {
+  let [fontLoaded]=useFonts({
+    'Italic':require('../assets/fonts/AveriaSerifLibre-BoldItalic.ttf'),
+    'LightItalic':require('../assets/fonts/AveriaSerifLibre-LightItalic.ttf'),
+    'Light':require('../assets/fonts/AveriaSerifLibre-Light.ttf')
+    
+  })
+
+
+  if(!fontLoaded){
+    return <AppLoading/>
+  }
   return (
    <>
     <ImageBackground source={require('../assets/images/background.png')} style={{width:400,}}>
@@ -27,9 +39,9 @@ export default function MyProfile() {
     <Image style={{width:50,height:50}} source={require('../assets/images/newhero01.png')}/>
 
 <Text style={{
-    // fontFamily:'AveriaSerifLibre-Italic',
-    color:'#450920',fontSize:31,}}
-    className=" font-bold  text-center">
+    color:'#450920',fontSize:40,
+    fontFamily:'Light',marginTop:3,}}
+    className=" font-semibold  text-center">
     MyTime
 </Text>
  
@@ -47,8 +59,10 @@ export default function MyProfile() {
 
 <Image style={{height:132.123,width:126,flexShrink:0}} source={require('../assets/images/onemore.png')}/>
   <View>
-    <Text style={{fontSize:25,fontStyle:'normal',color:'#FFEDDF',fontWeight:700,marginTop:30}}>Username</Text>
-    <Text style={{color:'#EEE3C8',fontWeight:400,fontStyle:'normal',fontSize:20}}>Designation</Text>
+    <Text style={{fontSize:25,fontStyle:'normal',color:'#FFEDDF',fontSize:35,
+    fontFamily:'Light',marginTop:30}}>Username</Text>
+    <Text style={{color:'#EEE3C8',
+    fontFamily:'Light',fontStyle:'normal',fontSize:22}}>Designation</Text>
   </View>
 </View>
 
@@ -63,15 +77,13 @@ export default function MyProfile() {
                     backgroundColor:'#A6435CCC',
                     width:264,
                     height:54,
-                    alignContent:'center',
                     marginLeft:60,
-                    alignItems:'center',
                     flexShrink:0}}>
                     <Text 
-                        className="text-xl font-bold text-center rounded-30" style={{ 
-                            // fontFamily:'AveriaSerifLibre-Italic',
-                            fontSize:22,fontWeight:'normal',
-                            color:'#FFEDDF',fontWeight:'700',
+                        className="text-xl font-semibold text-center rounded-30" style={{ 
+                            fontWeight:'normal',
+                            color:'#FFEDDF',fontSize:25,
+                            fontFamily:'Light',
                             
                         }}
                     >
@@ -103,7 +115,8 @@ export default function MyProfile() {
 
   <View style={{display:'flex',flexDirection:'row',borderBottomWidth:2,borderBottomColor:'#CBB8B8',paddingBottom:10,width:300,alignSelf:'center'}}>
     <Image style={{}} source={require('../assets/images/small.png')}/>
-  <Text style={{marginTop:5,fontWeight:700,fontStyle:'normal',fontSize:25,color:'#FFEDDF',}}>Recently Available</Text>
+  <Text style={{marginTop:8,fontStyle:'normal',fontSize:28,
+    fontFamily:'Light',color:'#FFEDDF',}}>Recently Available</Text>
   </View>
 
 
@@ -112,7 +125,7 @@ export default function MyProfile() {
   <TextInput 
             style={{
               width:370,alignSelf:'center',
-              borderBottomWidth:2,borderBottomColor:'black',paddingBottom:10,
+              borderBottomWidth:2,borderBottomColor:'#CBB8B8',paddingBottom:10,
               // width:398,
               backfaceVisibility:'hidden',
               opacity:0.4,
@@ -121,13 +134,11 @@ export default function MyProfile() {
               paddingHorizontal:5,
               height:60,
               flexShrink:0,
-              // backgroundColor:'#A6435C',
-              // borderRadius:20,
-              fontSize:18,
+              fontFamily:'Light',
+              fontSize:22,
               alignSelf:'center'
             }}
-              // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
-              className="myhaseeb text-white  font-bold "
+              className="myhaseeb text-white  font-semibold "
               placeholder="Specialization"
               value=" 1)  Your Activity" 
             />
@@ -135,78 +146,79 @@ export default function MyProfile() {
             style={{
               width:370,alignSelf:'center',
               borderBottomWidth:2,borderBottomColor:'#CBB8B8',paddingBottom:10,
-              paddingVertical:4,
+              // width:398,
               backfaceVisibility:'hidden',
               opacity:0.4,
               marginVertical:0,
+              paddingVertical:4,
               paddingHorizontal:5,
               height:60,
               flexShrink:0,
-              fontSize:18,
+              fontFamily:'Light',
+              fontSize:22,
               alignSelf:'center'
             }}
-              // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
-              className="myhaseeb text-white  font-bold "
+              className="myhaseeb text-white  font-semibold "
               placeholder="Specialization"
               value=" 2)  Your Activity" 
             />
-              <TextInput 
+               <TextInput 
             style={{
               width:370,alignSelf:'center',
               borderBottomWidth:2,borderBottomColor:'#CBB8B8',paddingBottom:10,
-              paddingVertical:4,
+              // width:398,
               backfaceVisibility:'hidden',
               opacity:0.4,
               marginVertical:0,
+              paddingVertical:4,
               paddingHorizontal:5,
               height:60,
               flexShrink:0,
-              // borderRadius:20,
-              fontSize:18,
+              fontFamily:'Light',
+              fontSize:22,
               alignSelf:'center'
             }}
-              // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
-              className="myhaseeb text-white  font-bold "
+              className="myhaseeb text-white  font-semibold "
               placeholder="Specialization"
               value=" 3)  Your Activity" 
             />
-              <TextInput 
+                <TextInput 
             style={{
               width:370,alignSelf:'center',
               borderBottomWidth:2,borderBottomColor:'#CBB8B8',paddingBottom:10,
-              paddingVertical:4,
+              // width:398,
               backfaceVisibility:'hidden',
               opacity:0.4,
               marginVertical:0,
+              paddingVertical:4,
               paddingHorizontal:5,
               height:60,
               flexShrink:0,
-              // borderRadius:20,
-              fontSize:18,
+              fontFamily:'Light',
+              fontSize:22,
               alignSelf:'center'
             }}
-              // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
-              className="myhaseeb text-white  font-bold "
+              className="myhaseeb text-white  font-semibold "
               placeholder="Specialization"
               value=" 4)  Your Activity" 
             />
-              <TextInput 
+                <TextInput 
             style={{
               width:370,alignSelf:'center',
               borderBottomWidth:2,borderBottomColor:'#CBB8B8',paddingBottom:10,
-              paddingVertical:4,
+              // width:398,
               backfaceVisibility:'hidden',
               opacity:0.4,
               marginVertical:0,
+              paddingVertical:4,
               paddingHorizontal:5,
               height:60,
               flexShrink:0,
-              // borderRadius:20,
-              fontSize:18,
+              fontFamily:'Light',
+              fontSize:22,
               alignSelf:'center'
             }}
-              // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
-              className="myhaseeb text-white  font-bold "
+              className="myhaseeb text-white  font-semibold "
               placeholder="Specialization"
               value=" 5)  Your Activity" 
             />

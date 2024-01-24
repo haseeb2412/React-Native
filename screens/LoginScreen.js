@@ -97,8 +97,10 @@ style={{ flex: 1 }}
         <Image  source={require('../assets/images/newhero01.png')}/>
 
         <Text style={{
-            // fontFamily:'AveriaSerifLibre-Italic',
             marginBottom:0,
+            fontFamily:'Light',
+            fontSize:40,
+                fontWeight:400,
             color:'#450920'}}
             className=" font-bold text-4xl text-center">
             MyTime
@@ -118,10 +120,10 @@ style={{ flex: 1 }}
                 flexShrink: 0,
                 color: '#FFEDDF',
                 textAlign: 'center',
-                // fontFamily: "Averia Serif Libre",
-                fontSize: 32,
+                fontFamily:'Light',
+            fontSize:37,
+                fontWeight:400,
                 fontStyle: 'normal',
-                fontWeight: 700,
                 marginTop:0,
                 marginLeft:100,
               }}
@@ -132,15 +134,15 @@ style={{ flex: 1 }}
 
 
 <View className="form space-y-2">
-            <Text className="text-gray-700 ml-4"
+            <Text className="text-gray-700 ml-4 font-semibold"
             style={{
               marginTop:-30,
               color: '#FFEDDF',
               textAlign: 'center',
-              // fontFamily: "Averia Serif Libre",
-              fontSize: 20,
+              fontFamily:'Light',
+              fontSize: 25,
               fontStyle: 'normal',
-              fontWeight: 700,
+              
               marginLeft:-260,
             }}
             
@@ -153,21 +155,22 @@ style={{ flex: 1 }}
               backgroundColor:'#45092059',
               marginLeft:30,
               color:'white',
+              fontFamily:'Light',
+              fontSize: 20,
               marginBottom:-3 ,
             }}
               className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
               placeholder="Enter Your Email"
               // value="john@gmail.com" 
             />
-            <Text className="text-gray-700 ml-4"
+            <Text className="text-gray-700 ml-4 font-semibold"
             style={{
               color: '#FFEDDF',
               textAlign: 'center',
-              // fontFamily: "Averia Serif Libre",
-              fontSize: 20,
+              fontFamily:'Light',
+              fontSize: 25,
               fontStyle: 'normal',
-              fontWeight: 700,
-              marginLeft:-230,
+              marginLeft:-220,
             }}
             >Password</Text>
             <TextInput 
@@ -179,10 +182,12 @@ style={{ flex: 1 }}
               backgroundColor:'rgba(69, 9, 32, 0.35)',
               marginLeft:30,
               color:'white',
+              fontFamily:'Light',
+              fontSize: 20,
             }}
               className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
               secureTextEntry
-              placeholder="Your Password"
+              placeholder="Password"
               // value="test12345" 
             />
             <TouchableOpacity 

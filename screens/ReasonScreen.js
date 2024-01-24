@@ -1,9 +1,12 @@
 import { View, Text ,Image,TextInput,TouchableOpacity,ImageBackground} from 'react-native'
 import {React,useState} from 'react'
-import COLORS from '../constants/colors';
-import {LinearGradient} from 'expo-linear-gradient';
+// import {LinearGradient} from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import RNPickerSelect from 'react-native-picker-select';
+// import { useNavigation } from '@react-navigation/native'
+import AppLoading from 'expo-app-loading'
+import { useFonts } from 'expo-font'
+
 
 export default function ReasonScreen() {
     const [selectedValue, setSelectedValue] = useState(null);
@@ -30,6 +33,20 @@ export default function ReasonScreen() {
         { label: 'Swimming', value: 'Swimming' },
         { label: 'Walking', value: 'Walking' },
       ];
+
+      // const navigation = useNavigation();
+
+      let [fontLoaded]=useFonts({
+        'Italic':require('../assets/fonts/AveriaSerifLibre-BoldItalic.ttf'),
+        'LightItalic':require('../assets/fonts/AveriaSerifLibre-LightItalic.ttf'),
+        'Light':require('../assets/fonts/AveriaSerifLibre-Light.ttf')
+        
+      })
+    
+    
+      if(!fontLoaded){
+        return <AppLoading/>
+      }
   return (
   <>
           <ImageBackground source={require('../assets/images/background.png')} style={{width:400,height:800}}>
@@ -53,8 +70,9 @@ export default function ReasonScreen() {
       
       <Text style={{
           // fontFamily:'AveriaSerifLibre-Italic',
-          color:'#450920',fontSize:31,}}
-          className=" font-bold  text-center">
+          color:'#450920',fontSize:40,
+          fontFamily:'Light',marginTop:2}}
+          className=" font-semibold  text-center">
           MyTime
       </Text>
        
@@ -72,14 +90,16 @@ export default function ReasonScreen() {
       
       <Image style={{height:80,width:90,flexShrink:0,marginTop:20,}} source={require('../assets/images/onemore.png')}/>
         <View>
-          <Text style={{fontSize:24,fontStyle:'normal',color:'#FFEDDF',fontWeight:700,marginTop:40}}>Username</Text>
+          <Text style={{fontSize:24,fontStyle:'normal',color:'#FFEDDF',marginTop:40, fontSize:40,
+    fontFamily:'Light',}}>Username</Text>
           <Text style={{color:'#EEE3C8',fontWeight:400,fontStyle:'normal',fontSize:20}}></Text>
         </View>
       </View>
             
    
     <View>
-        <Text style={{marginLeft:80,color:'#FFEDDF',fontSize:20,fontWeight:700,marginVertical:4}}>Set Availability</Text>
+        <Text style={{marginLeft:80,color:'#FFEDDF',fontSize:25,
+    fontFamily:'Light',marginVertical:4}}>Set Availability</Text>
         <TouchableOpacity
                 style={{
                 borderRadius:30,
@@ -88,9 +108,7 @@ export default function ReasonScreen() {
                 width:264,
                 height:54,
                 marginBottom:-20,
-                alignContent:'center',
                 marginLeft:60,
-                alignItems:'center',
                 flexShrink:0}}>
             <RNPickerSelect
 
@@ -103,7 +121,8 @@ export default function ReasonScreen() {
     </View>
 
     <View>
-        <Text style={{marginLeft:80,marginTop:40,color:'#FFEDDF',fontSize:20,fontWeight:700,marginVertical:4}}>Select Reason</Text>
+        <Text style={{marginLeft:80,marginTop:40,color:'#FFEDDF',fontSize:25,
+    fontFamily:'Light',marginVertical:4}}>Select Reason</Text>
         <TouchableOpacity
                 style={{
                 borderRadius:30,
@@ -111,9 +130,7 @@ export default function ReasonScreen() {
                 backgroundColor:'#FDADAF99',
                 width:264,
                 height:54,
-                alignContent:'center',
                 marginLeft:60,
-                alignItems:'center',
                 flexShrink:0}}>
             <RNPickerSelect
 
@@ -132,7 +149,8 @@ export default function ReasonScreen() {
       
       
       <View>
-        <Text style={{alignSelf:'center',fontSize:20,fontWeight:500,color:'#FFEDDF',marginTop:50}}>Leave a custom Message</Text>
+        <Text style={{alignSelf:'center',fontSize:25,
+    fontFamily:'Light',color:'#FFEDDF',marginTop:50}}>Leave a custom Message</Text>
 
         <TextInput 
             style={{
@@ -145,13 +163,12 @@ export default function ReasonScreen() {
               paddingHorizontal:8,
               height:45,
               flexShrink:0,
-            //   backgroundColor:'white',
               borderRadius:20,
               fontSize:18,
-            //   alignSelf:'center'
+              fontSize:22,
+              fontFamily:'Light',
             }}
-              // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
-              className="myhaseeb text-white  font-bold rounded-2xl"
+              className="myhaseeb text-white  font-semibold rounded-2xl"
               placeholder="Specialization"
             //   value="Specialization" 
             />
@@ -168,10 +185,10 @@ export default function ReasonScreen() {
             marginVertical:15,
             flexShrink:0}}>
             <Text 
-                className=" font-bold text-center " style={{ 
-                    // fontFamily:'AveriaSerifLibre-Italic',
-                    color:'#450920',fontWeight:'700',paddingVertical:2,
-                    fontSize:18,
+                className=" font-semibold text-center " style={{ 
+                    color:'#450920',paddingVertical:2,
+                    fontSize:25,
+    fontFamily:'Light',
                 }}
             >
                 Done
