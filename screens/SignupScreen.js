@@ -14,10 +14,6 @@ export default function SignUpScreen() {
     const navigation = useNavigation();
   return (
     
-    // <ImageBackground source={require('../assets/images/background.png')} style={{width:400,height:800}}>
-
-
-
   <LinearGradient
 colors={[COLORS.primary, COLORS.secondary]}  
 style={{ flex: 1 }}

@@ -8,9 +8,9 @@ import ReasonScreen from './screens/ReasonScreen';
 
 export default function App() {
   return (
-    // <AppNavigation/>
+    <AppNavigation/>
     // <ProfileScreen/>
-    <MyProfile/>
+    // <MyProfile/>
     // <ReasonScreen/>
   );
 }
