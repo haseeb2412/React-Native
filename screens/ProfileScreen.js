@@ -1,11 +1,14 @@
 import { View, Text ,Image,TextInput,TouchableOpacity, ImageBackground} from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import AppLoading from 'expo-app-loading'
+// import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'
+import { useNavigation } from '@react-navigation/native'
 
 
 export default function ProfileScreen() {
+  const navigation =useNavigation();
+
   let [fontLoaded]=useFonts({
     'Italic':require('../assets/fonts/AveriaSerifLibre-BoldItalic.ttf'),
     'LightItalic':require('../assets/fonts/AveriaSerifLibre-LightItalic.ttf'),
@@ -14,9 +17,9 @@ export default function ProfileScreen() {
   })
 
 
-  if(!fontLoaded){
-    return <AppLoading/>
-  }
+  // if(!fontLoaded){
+  //   return <AppLoading/>
+  // }
   return (
     <>
     <ImageBackground source={require('../assets/images/background.png')} style={{height:800}}>
@@ -62,67 +65,34 @@ export default function ProfileScreen() {
 
 <View    
 
-style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf:'center',}}>
-{/* <Text className="text-gray-700 ml-4"
-            style={{
-              color: '#FFEDDF',
-              textAlign: 'center',
-              // fontFamily: "Averia Serif Libre",
-              fontSize: 20,
-              fontStyle: 'normal',
-              fontWeight: 700,
-              marginLeft:-230,
-            }}
-            >Password</Text> */}
+style={{width:295,height:355,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf:'center',}}>
             <TextInput 
             style={{
               opacity:0.8,
-              width:223,
+              width:250,
               marginVertical:20,
               paddingHorizontal:8,
-              height:45,
+              height:60,
               flexShrink:0,
               backgroundColor:'#A6435C',
               borderRadius:20,
               fontSize:22,
               alignSelf:'center',
               fontFamily:'Light',
-              // fontWeight:400,
             }}
-              // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
               className="myhaseeb text-white  font-semibold rounded-2xl"
               placeholder="Name"
               value="Name" 
             />
 
-            <TextInput 
-            style={{
-              width:223,
-              opacity:0.8,
-              marginVertical:15,
-              paddingHorizontal:8,
-              height:45,
-              flexShrink:0,
-              backgroundColor:'#A6435C',
-              borderRadius:20,
-              fontSize:18,
-              fontSize:22,
-              alignSelf:'center',
-              fontFamily:'Light',
-            }}
-              // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
-              className="myhaseeb text-white  font-semibold rounded-2xl"
-              placeholder="Specialization"
-              value="Specialization" 
-            />
             
             <TextInput 
             style={{
-              width:223,
+              width:250,
               marginVertical:15,
               opacity:0.8,
               paddingHorizontal:8,
-              height:45,
+              height:60,
               flexShrink:0,
               backgroundColor:'#A6435C',
               borderRadius:20,
@@ -137,11 +107,11 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
 
           <TextInput 
             style={{
-              width:223,
+              width:250,
               marginVertical:15,
               opacity:0.8,
               paddingHorizontal:8,
-              height:45,
+              height:60,
               flexShrink:0,
               backgroundColor:'#A6435C',
               borderRadius:20,
@@ -160,7 +130,7 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
  {/* save and edit button */}
 
 <View  
-            style={{display:'flex',gap:100,flexDirection:'row',marginLeft:13, position: 'relative', bottom: 2 }}
+            style={{display:'flex',gap:100,flexDirection:'row',marginLeft:13, position: 'relative', bottom: 0 }}
             >
 
 <TouchableOpacity
@@ -189,7 +159,6 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
             backgroundColor:'#450920',
             width:83,
             height:39,
-            // marginLeft:60,
             flexShrink:0}}>
             <Text 
                 className=" font-semibold text-center " style={{ 
@@ -232,7 +201,13 @@ style={{width:295,height:366,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
 }}
   >
     <SafeAreaView style={{display:'flex',flexDirection:'row',gap:50,alignSelf:'center'}}>
-    <Image style={{width:50,height:40}} source={require('../assets/images/bellIcon.png')}/>
+    <TouchableOpacity  onPress={() => navigation.navigate('Reason')}>
+  <Image source={require('../assets/images/bellIcon.png')} style={{ width: 50, height: 40 }} />
+</TouchableOpacity>
+
+
+
+    {/* <Image style={{width:50,height:40}} source={require('../assets/images/bellIcon.png')}/> */}
     <Image style={{width:68,height:68,overflow:'visible',position:'relative',top:-25}} source={require('../assets/images/newhero01.png')}/>
     <Image style={{width:50,height:40,marginLeft:15}} source={require('../assets/images/contact.png')}/>
 

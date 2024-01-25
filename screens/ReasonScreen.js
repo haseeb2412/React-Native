@@ -169,8 +169,7 @@ export default function ReasonScreen() {
               fontFamily:'Light',
             }}
               className="myhaseeb text-white  font-semibold rounded-2xl"
-              placeholder="Specialization"
-            //   value="Specialization" 
+
             />
       </View>
       
