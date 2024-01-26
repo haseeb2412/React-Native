@@ -1,20 +1,32 @@
 import { View, Text ,Image,TextInput,TouchableOpacity, ImageBackground} from 'react-native'
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-// import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'
 import { useNavigation } from '@react-navigation/native'
+import { firebase } from '../config';
 
 
 export default function ProfileScreen() {
   const navigation =useNavigation();
+  const [name,setName]=useState('');
 
-  let [fontLoaded]=useFonts({
-    'Italic':require('../assets/fonts/AveriaSerifLibre-BoldItalic.ttf'),
-    'LightItalic':require('../assets/fonts/AveriaSerifLibre-LightItalic.ttf'),
-    'Light':require('../assets/fonts/AveriaSerifLibre-Light.ttf')
+
+
+  const handleLogout = async () => {
+    try {
+      await firebase.auth().signOut(); 
+      navigation.navigate('Login'); 
+    } catch (error) {
+      console.error('Logout error');
+    }
+  };
+
+  // let [fontLoaded]=useFonts({
+  //   'Italic':require('../assets/fonts/AveriaSerifLibre-BoldItalic.ttf'),
+  //   'LightItalic':require('../assets/fonts/AveriaSerifLibre-LightItalic.ttf'),
+  //   'Light':require('../assets/fonts/AveriaSerifLibre-Light.ttf')
     
-  })
+  // })
 
 
   // if(!fontLoaded){
@@ -43,7 +55,11 @@ export default function ProfileScreen() {
     MyTime
 </Text>
  
+
+<TouchableOpacity onPress={handleLogout}>
 <Image  style={{width:70,height:60,left:50,}} source={require('../assets/images/newremove.png')}/>
+</TouchableOpacity>
+
 
     </SafeAreaView>
   </View>
@@ -201,17 +217,20 @@ style={{width:295,height:355,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
 }}
   >
     <SafeAreaView style={{display:'flex',flexDirection:'row',gap:50,alignSelf:'center'}}>
-    <TouchableOpacity  onPress={() => navigation.navigate('Reason')}>
-  <Image source={require('../assets/images/bellIcon.png')} style={{ width: 50, height: 40 }} />
+    
+
+    <TouchableOpacity onPress={() => navigation.navigate('MyProfile')}>
+  <Image source={require('../assets/images/bellIcon.png')} style={{ width: 50, height: 40 ,bottom:25,}} />
 </TouchableOpacity>
 
 
+    <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+  <Image source={require('../assets/images/newhero01.png')} style={{width:68,height:68,overflow:'visible',position:'relative',top:-50}} />
+</TouchableOpacity>
 
-    {/* <Image style={{width:50,height:40}} source={require('../assets/images/bellIcon.png')}/> */}
-    <Image style={{width:68,height:68,overflow:'visible',position:'relative',top:-25}} source={require('../assets/images/newhero01.png')}/>
-    <Image style={{width:50,height:40,marginLeft:15}} source={require('../assets/images/contact.png')}/>
-
- 
+<TouchableOpacity onPress={() => navigation.navigate('Reason')}>
+  <Image source={require('../assets/images/contact.png')} style={{width:50,height:40,marginLeft:15,bottom:25,}} />
+</TouchableOpacity>
 
     </SafeAreaView>
   </View>

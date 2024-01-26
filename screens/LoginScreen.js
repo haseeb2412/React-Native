@@ -1,99 +1,38 @@
 import { View, Text, TouchableOpacity, Image, TextInput ,ImageBackground} from 'react-native'
-import React from 'react'
+import {React,useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import {ArrowLeftIcon} from 'react-native-heroicons/solid'
-  import { themeColors } from './Theme/Index'
 import { useNavigation } from '@react-navigation/native'
 import COLORS from '../constants/colors';
+import { firebase } from '../config';
 import {LinearGradient} from 'expo-linear-gradient';
 import {ChevronDoubleRightIcon} from 'react-native-heroicons/solid'
 
 export default function LoginScreen() {
   const navigation = useNavigation();
+
+  const [email,setemail]=useState('');
+    const [password,setPassword]=useState('');
+
+    loginUser =async (email,password)=>{
+      try {
+          await firebase.auth().signInWithEmailAndPassword(email,password);
+          alert('Logged In');
+      } catch (error) {
+          console.log("logged in error ")
+      }
+  }
+
+
   return (
-    // <View className="flex-1 bg-white" style={{backgroundColor: themeColors.bg}}>
-    //   <SafeAreaView  className="flex ">
-    //     <View className="flex-row justify-start">
-    //       <TouchableOpacity onPress={()=> navigation.goBack()} 
-    //       className="bg-yellow-400 p-2 rounded-tr-2xl rounded-bl-2xl ml-4">
-    //         <ArrowLeftIcon size="20" color="black" />
-    //       </TouchableOpacity>
-    //     </View>
-    //     <View  className="flex-row justify-center">
-    //       <Image source={require('../assets/images/img01.png')} 
-    //       style={{width: 200, height: 200}} />
-    //     </View>
-        
-        
-    //   </SafeAreaView>
-    //   <View 
-    //     style={{borderTopLeftRadius: 50, borderTopRightRadius: 50}} 
-    //     className="flex-1 bg-white px-8 pt-8">
-          // <View className="form space-y-2">
-          //   <Text className="text-gray-700 ml-4">Email Address</Text>
-          //   <TextInput 
-          //     className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
-          //     placeholder="email"
-          //     value="john@gmail.com" 
-          //   />
-          //   <Text className="text-gray-700 ml-4">Password</Text>
-          //   <TextInput 
-          //     className="p-4 bg-gray-100 text-gray-700 rounded-2xl"
-          //     secureTextEntry
-          //     placeholder="password"
-          //     value="test12345" 
-          //   />
-          //   <TouchableOpacity className="flex items-end">
-          //     <Text className="text-gray-700 mb-5">Forgot Password?</Text>
-          //   </TouchableOpacity>
-          //   <TouchableOpacity 
-          //     className="py-3 bg-yellow-400 rounded-xl">
-          //       <Text 
-          //           className="text-xl font-bold text-center text-gray-700"
-          //       >
-          //               Login
-          //       </Text>
-          //    </TouchableOpacity>
-            
-          // </View>
-    //       <Text className="text-xl text-gray-700 font-bold text-center py-5">Or</Text>
-    //       <View className="flex-row justify-center space-x-12">
-    //         <TouchableOpacity className="p-2 bg-gray-100 rounded-2xl">
-    //           <Image source={require('../assets/icons/google.png')} className="w-10 h-10" />
-    //         </TouchableOpacity>
-    //         <TouchableOpacity className="p-2 bg-gray-100 rounded-2xl">
-    //           <Image source={require('../assets/icons/apple.png')} className="w-10 h-10" />
-    //         </TouchableOpacity>
-    //         <TouchableOpacity className="p-2 bg-gray-100 rounded-2xl">
-    //           <Image source={require('../assets/icons/facebook.png')} className="w-10 h-10" />
-    //         </TouchableOpacity>
-    //       </View>
-    //       <View className="flex-row justify-center mt-7">
-    //           <Text className="text-gray-500 font-semibold">
-    //               Don't have an account?
-    //           </Text>
-    //           <TouchableOpacity onPress={()=> navigation.navigate('SignUp')}>
-    //               <Text className="font-semibold text-yellow-500"> Sign Up</Text>
-    //           </TouchableOpacity>
-    //       </View>
-          
-    //   </View>
-    // </View>
-
-
-    // <ImageBackground source={require('../assets/images/background.png')} style={{width:400,height:800}}>
-
-
-
+  
 
 <LinearGradient
-colors={[COLORS.primary, COLORS.secondary]}  // Add your two colors here
+colors={[COLORS.primary, COLORS.secondary]}  
 style={{ flex: 1 }}
 > 
 <SafeAreaView className="flex-1" style={{}}>
 <View className="flex-1 flex justify-around my-4">
     <View className='haseeb' style={{display:"flex",alignItems:"center",flexDirection:"row",justifyContent:"center",color:'white'}}>
-        {/* <ClockIcon size={70} color="black" /> */}
         <Image  source={require('../assets/images/newhero01.png')}/>
 
         <Text style={{
@@ -130,9 +69,6 @@ style={{ flex: 1 }}
                 >Log In</Text>
 
 
-
-
-
 <View className="form space-y-2">
             <Text className="text-gray-700 ml-4 font-semibold"
             style={{
@@ -159,9 +95,10 @@ style={{ flex: 1 }}
               fontSize: 20,
               marginBottom:-3 ,
             }}
+            onChangeText={(email)=> setemail(email)} 
               className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
               placeholder="Enter Your Email"
-              // value="john@gmail.com" 
+
             />
             <Text className="text-gray-700 ml-4 font-semibold"
             style={{
@@ -185,6 +122,7 @@ style={{ flex: 1 }}
               fontFamily:'Light',
               fontSize: 20,
             }}
+            onChangeText={(password)=> setPassword(password)}
               className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
               secureTextEntry
               placeholder="Password"
@@ -200,24 +138,16 @@ style={{ flex: 1 }}
                 marginLeft:240,
                 flexShrink:0
               }}
-              
+              onPress={ () => {
+                 loginUser(email, password);
+                // navigation.navigate('Profile');
+              }}
               >
-                <Text 
-                    className="text-xl "
-                    style={{ 
-                      // fontFamily:'AveriaSerifLibre-Italic',
-                      color:'#FFFFFF',fontWeight:500,
-                      width:56,
-                      marginLeft:28,
-                      marginTop:-9,
-              // height:9,
-                  }}
-                >
-                        {/* Sign Up */}
-                        <ChevronDoubleRightIcon size={30}  style={{color:'#FFFFFF',
-                     width:36,marginTop:10,
+                
+                        
+                        <ChevronDoubleRightIcon size={40} style={{color:'#FFFFFF',
+                     width:36,marginTop:-12,marginLeft:25,
               height:36,}}/>
-                </Text>
                 
              </TouchableOpacity>
             
@@ -237,9 +167,3 @@ style={{ flex: 1 }}
     
   )
 }
-
-
-          {/* <TouchableOpacity className="flex items-end">
-              <Text className="text-gray-700 mb-5"
-              >Forgot Password?</Text>
-            </TouchableOpacity> */}

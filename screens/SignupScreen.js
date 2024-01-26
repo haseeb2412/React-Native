@@ -1,17 +1,49 @@
-import { View, Text, TouchableOpacity, Image, TextInput ,ImageBackground} from 'react-native'
-import React from 'react'
-import { themeColors } from './Theme/Index';
+import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
+import React,{useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {ArrowLeftIcon} from 'react-native-heroicons/solid';
 import { useNavigation } from '@react-navigation/native';
 import COLORS from '../constants/colors';
+import {firebase} from '../config'
 import {LinearGradient} from 'expo-linear-gradient';
 import {ChevronDoubleRightIcon} from 'react-native-heroicons/solid'
 
 
-// subscribe for more videos like this :)
 export default function SignUpScreen() {
     const navigation = useNavigation();
+    // const [name,setname]=useState('');
+    const [email,setemail]=useState('');
+    const [password,setPassword]=useState('');
+
+
+
+
+
+    const registerUser = async () => {
+      try {
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+  
+  
+        await user.updateProfile({
+          // displayName: name,
+        });
+  
+        await firebase.firestore().collection('users').doc(user.uid).set({
+          // name,
+          email,
+        });async
+  
+        alert('User Registered', 'Registration successful');
+      } catch (error) {
+        console.error('Registration error:', error);
+        alert('Registration failed', 'Please try again.');
+      }
+    };
+
+
+
+
   return (
     
   <LinearGradient
@@ -89,6 +121,8 @@ style={{ flex: 1 }}
               className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
               placeholder="Enter Your Email"
               // value="john@gmail.com" 
+            onChangeText={(email)=> setemail(email)}
+
             />
             <Text className="text-gray-700 ml-4 font-semibold "
             style={{
@@ -110,12 +144,14 @@ style={{ flex: 1 }}
               backgroundColor:'rgba(69, 9, 32, 0.35)',
               marginLeft:30,
               fontSize:20,
+              color:'white'
             }}
+            onChangeText={(password)=> setPassword(password)}
               className="p-4  rounded-2xl"
               secureTextEntry
               placeholder="Password"
             />
-            <TouchableOpacity 
+           <TouchableOpacity 
               className="py-3 "
               style={{
                 borderRadius:25,
@@ -125,24 +161,15 @@ style={{ flex: 1 }}
                 marginLeft:240,
                 flexShrink:0
               }}
-              
+              onPress={ () => {
+                registerUser()
+              }}
               >
-                <Text 
-                    className="text-xl "
-                    style={{ 
-                      // fontFamily:'AveriaSerifLibre-Italic',
-                      color:'#FFFFFF',fontWeight:500,
-                      width:56,
-                      marginLeft:28,
-                      marginTop:-9,
-              // height:9,
-                  }}
-                >
-                        {/* Sign Up */}
-                        <ChevronDoubleRightIcon size={30}  style={{color:'#FFFFFF',
-                     width:36,marginTop:10,
+                
+                        
+                        <ChevronDoubleRightIcon size={40} style={{color:'#FFFFFF',
+                     width:36,marginTop:-12,marginLeft:25,
               height:36,}}/>
-                </Text>
                 
              </TouchableOpacity>
             

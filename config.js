@@ -4,13 +4,13 @@ import 'firebase/compat/firestore'
 
 
 const firebaseConfig={
-    apiKey: "AIzaSyBzmVdxHY4qp05TrPGXTVEAyN71CaWgHrQ",
-  authDomain: "mytime-6dea5.firebaseapp.com",
-  projectId: "mytime-6dea5",
-  storageBucket: "mytime-6dea5.appspot.com",
-  messagingSenderId: "960312883115",
-  appId: "1:960312883115:web:42a945c1777a34ebd444ee",
-  measurementId: "G-4SK6GVSTG8"
+  apiKey: "AIzaSyD6tvMLBqZ3oLMIQAAyNsHiATIu6Inhn0Q",
+  authDomain: "mytime-2a277.firebaseapp.com",
+  projectId: "mytime-2a277",
+  storageBucket: "mytime-2a277.appspot.com",
+  messagingSenderId: "467936141849",
+  appId: "1:467936141849:web:2ff3b4cbfefbefa1a38088",
+  measurementId: "G-JSBENMGK2D"
   }
 
   if(!firebase.apps.length){

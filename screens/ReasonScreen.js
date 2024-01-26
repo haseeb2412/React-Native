@@ -6,9 +6,11 @@ import RNPickerSelect from 'react-native-picker-select';
 // import { useNavigation } from '@react-navigation/native'
 import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function ReasonScreen() {
+  const navigation =useNavigation();
     const [selectedValue, setSelectedValue] = useState(null);
     const [selectedValue2, setSelectedValue2] = useState(null);
 
@@ -51,14 +53,6 @@ export default function ReasonScreen() {
   <>
           <ImageBackground source={require('../assets/images/background.png')} style={{width:400,height:800}}>
       
-      
-        
-      
-      
-      
-      
-            {/* top section  */}
-      
             <View 
         style={{
           width:394,
@@ -75,8 +69,13 @@ export default function ReasonScreen() {
           className=" font-semibold  text-center">
           MyTime
       </Text>
-       
+
+      <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
       <Image  style={{width:70,height:60,left:50,}} source={require('../assets/images/newremove.png')}/>
+</TouchableOpacity>
+
+       
+      
       
           </SafeAreaView>
         </View>
@@ -238,9 +237,21 @@ export default function ReasonScreen() {
       }}
         >
           <SafeAreaView style={{display:'flex',flexDirection:'row',gap:50,alignSelf:'center'}}>
-          <Image style={{width:50,height:40}} source={require('../assets/images/bellIcon.png')}/>
-          <Image style={{width:68,height:68,overflow:'visible',position:'relative',top:-25}} source={require('../assets/images/newhero01.png')}/>
-          <Image style={{width:50,height:40,marginLeft:15}} source={require('../assets/images/contact.png')}/>
+          
+
+          <TouchableOpacity onPress={() => navigation.navigate('MyProfile')}>
+  <Image source={require('../assets/images/bellIcon.png')} style={{ width: 50, height: 40 ,bottom:25,}} />
+</TouchableOpacity>
+
+
+    <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+  <Image source={require('../assets/images/newhero01.png')} style={{width:68,height:68,overflow:'visible',position:'relative',top:-50}} />
+</TouchableOpacity>
+
+<TouchableOpacity onPress={() => navigation.navigate('Reason')}>
+  <Image source={require('../assets/images/contact.png')} style={{width:50,height:40,marginLeft:15,bottom:25,}} />
+</TouchableOpacity>
+
       
        
       

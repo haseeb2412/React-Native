@@ -3,9 +3,11 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'
+import { useNavigation } from '@react-navigation/native'
 
 
 export default function MyProfile() {
+  const navigation = useNavigation();
   let [fontLoaded]=useFonts({
     'Italic':require('../assets/fonts/AveriaSerifLibre-BoldItalic.ttf'),
     'LightItalic':require('../assets/fonts/AveriaSerifLibre-LightItalic.ttf'),
@@ -44,8 +46,16 @@ export default function MyProfile() {
     className=" font-semibold  text-center">
     MyTime
 </Text>
- 
+
+
+
+
+<TouchableOpacity onPress={() => navigation.navigate('Profile')}>
 <Image  style={{width:70,height:60,left:50,}} source={require('../assets/images/newremove.png')}/>
+</TouchableOpacity>
+
+ 
+
 
     </SafeAreaView>
   </View>
@@ -308,9 +318,20 @@ export default function MyProfile() {
 }}
   >
     <SafeAreaView style={{display:'flex',flexDirection:'row',gap:50,alignSelf:'center'}}>
-    <Image style={{width:50,height:40}} source={require('../assets/images/bellIcon.png')}/>
-    <Image style={{width:68,height:68,overflow:'visible',position:'relative',top:-25}} source={require('../assets/images/newhero01.png')}/>
-    <Image style={{width:50,height:40,marginLeft:15}} source={require('../assets/images/contact.png')}/>
+
+<TouchableOpacity onPress={() => navigation.navigate('MyProfile')}>
+  <Image source={require('../assets/images/bellIcon.png')} style={{ width: 50, height: 40 ,bottom:25,}} />
+</TouchableOpacity>
+
+
+    <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+  <Image source={require('../assets/images/newhero01.png')} style={{width:68,height:68,overflow:'visible',position:'relative',top:-50}} />
+</TouchableOpacity>
+
+<TouchableOpacity onPress={() => navigation.navigate('Reason')}>
+  <Image source={require('../assets/images/contact.png')} style={{width:50,height:40,marginLeft:15,bottom:25,}} />
+</TouchableOpacity>
+
 
  
 

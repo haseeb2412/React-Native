@@ -98,18 +98,6 @@ export default function WelcomeScreen() {
 </SafeAreaView>
 
 
-
-<TouchableOpacity onPress={() => navigation.navigate('Reason')}>
-  <Image source={require('../assets/images/contact.png')} style={{ width: 50, height: 40 }} />
-</TouchableOpacity>
-<TouchableOpacity onPress={() => navigation.navigate('MyProfile')}>
-  <Image source={require('../assets/images/bellIcon.png')} style={{ width: 50, height: 40 }} />
-</TouchableOpacity>
-
-
-
-
-
 </LinearGradient>
   )
 }
