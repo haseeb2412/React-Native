@@ -3,26 +3,92 @@ import {React,useState} from 'react'
 // import {LinearGradient} from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import RNPickerSelect from 'react-native-picker-select';
-// import { useNavigation } from '@react-navigation/native'
 import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'
 import { useNavigation } from '@react-navigation/native';
-
+import { firebase ,database} from '../config';
+// import { database } from '@react-native-firebase/database';
 
 export default function ReasonScreen() {
   const navigation =useNavigation();
+    const [message, setmessage] = useState('');
     const [selectedValue, setSelectedValue] = useState(null);
     const [selectedValue2, setSelectedValue2] = useState(null);
 
+
+
+
+
+
+
+
+
+    // handleDone = async () => {
+    //   if (message.trim() === '') {
+    //     alert('Please enter a message before submitting.');
+    //     return;
+    //   }
+  
+    //   try {
+    //     // Push the message to the Firebase Realtime Database
+    //     await database().ref('messages').push({
+    //       text: message,
+    //       timestamp: database.ServerValue.TIMESTAMP,
+    //     });
+    //     alert('Message submitted successfully!');
+    //     setmessage('');
+    //   } catch (error) {
+    //     console.error('Error submitting message:', error);
+    //     alert('Failed to submit message. Please try again.');
+    //   }
+    // };
+
+
+
+    const handleDone = async () => {
+      console.log('Firebase Database:', firebase.database()); // Debugging
+  
+      // if (message.trim() === '') {
+      //   alert('Please enter a message before submitting.');
+      //   return;
+      // }
+
+      if (!selectedValue || !selectedValue2 || message.trim() === '') {
+        alert('Please fill in all fields before submitting.');
+        return;
+      }
+  
+      try {
+
+        const user = firebase.auth().currentUser;
+      const userEmail = user ? user.email : 'Unknown Email';
+        // Push the message to the Firebase Realtime Database
+        await firebase.database().ref('messages').push({
+          availability: selectedValue,
+        reason: selectedValue2,
+        email: userEmail,
+          text: message,
+          timestamp: firebase.database.ServerValue.TIMESTAMP,
+        });
+        alert('Message submitted successfully!');
+        setmessage('');
+      } catch (error) {
+        console.error('Error submitting message:', error);
+        alert('Failed to submit message. Please try again.');
+      }
+    };
+
+
+
     const placeholder = {
-      label: 'Set availability...',
+        label: 'Default',
       value: null,
     };
   
     const options = [
-      { label: 'Monday', value: 'Monday' },
-      { label: 'Tuesday', value: 'Tuesday' },
-      { label: 'Wednesday', value: 'Wednesday' },
+      { label: 'Avalaible', value: 'Avalaible' },
+      { label: 'Not Avalaible', value: 'Not Avalaible' },
+      // { label: 'Wednesday', value: 'Wednesday' },
     ];
 
     const placeholder2 = {
@@ -31,9 +97,10 @@ export default function ReasonScreen() {
       };
     
       const options2 = [
-        { label: 'Running', value: 'Running' },
-        { label: 'Swimming', value: 'Swimming' },
-        { label: 'Walking', value: 'Walking' },
+        { label: 'Meeting', value: 'Meeting' },
+        { label: 'Lunch', value: 'Lunch' },
+        { label: 'Class', value: 'Class' },
+        { label: 'Other', value: 'Other' },
       ];
 
       // const navigation = useNavigation();
@@ -97,7 +164,7 @@ export default function ReasonScreen() {
             
    
     <View>
-        <Text style={{marginLeft:80,color:'#FFEDDF',fontSize:25,
+        <Text style={{marginLeft:80,color:'white',fontSize:25,
     fontFamily:'Light',marginVertical:4}}>Set Availability</Text>
         <TouchableOpacity
                 style={{
@@ -106,10 +173,12 @@ export default function ReasonScreen() {
                 backgroundColor:'#A6435CCC',
                 width:264,
                 height:54,
+                color:'white',
                 marginBottom:-20,
                 marginLeft:60,
                 flexShrink:0}}>
-            <RNPickerSelect
+            <RNPickerSelect  
+            // style={{color:'white'}}
 
                 placeholder={placeholder}
                 items={options}
@@ -152,6 +221,8 @@ export default function ReasonScreen() {
     fontFamily:'Light',color:'#FFEDDF',marginTop:50}}>Leave a custom Message</Text>
 
         <TextInput 
+        value={message}
+         onChangeText={(message)=>setmessage(message)}
             style={{
                 width:370,alignSelf:'center',
                 borderBottomWidth:2,borderBottomColor:'#FFEDDF',paddingBottom:10,
@@ -172,7 +243,7 @@ export default function ReasonScreen() {
             />
       </View>
       
-      <TouchableOpacity
+      <TouchableOpacity onPress={handleDone}
         // onPress={()=> navigation.navigate('SignUp')}
         className="py-2 " style={{
             borderRadius:30,
