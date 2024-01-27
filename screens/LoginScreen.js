@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import COLORS from '../constants/colors';
 import { firebase } from '../config';
+import { database } from '@react-native-firebase/database';
 import {LinearGradient} from 'expo-linear-gradient';
 import {ChevronDoubleRightIcon} from 'react-native-heroicons/solid'
 
