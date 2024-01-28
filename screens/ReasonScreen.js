@@ -17,7 +17,6 @@ export default function ReasonScreen() {
     useEffect(() => {
       const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-          // Extract the part before '@' from the email and set it as the username
           const userEmail = user.email || '';
           const usernamePartBeforeAt = userEmail.split('@')[0];
           setUsername(usernamePartBeforeAt);
@@ -50,7 +49,7 @@ export default function ReasonScreen() {
           timestamp: firebase.database.ServerValue.TIMESTAMP,
         });
         alert('Message submitted successfully!');
-        setmessage('');
+        setmessage(''),setSelectedValue(''),setSelectedValue2('');
       } catch (error) {
         console.error('Error submitting message:', error);
         alert('Failed to submit message. Please try again.');
