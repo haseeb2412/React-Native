@@ -24,9 +24,9 @@ export default function WelcomeScreen() {
         
       })
     
-    if(!fontLoaded){
-        return <AppLoading/>
-      }
+    // if(!fontLoaded){
+    //     return <AppLoading/>
+    //   }
   return (
     <LinearGradient
     colors={[COLORS.primary, COLORS.secondary]}  
