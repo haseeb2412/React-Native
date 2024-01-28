@@ -1,13 +1,30 @@
 import { View, Text ,Image,TextInput,TouchableOpacity,ImageBackground} from 'react-native'
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'
 import { useNavigation } from '@react-navigation/native'
+import { firebase ,database} from '../config';
 
 
 export default function MyProfile() {
   const navigation = useNavigation();
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // Extract the part before '@' from the email and set it as the username
+        const userEmail = user.email || '';
+        const usernamePartBeforeAt = userEmail.split('@')[0];
+        setUsername(usernamePartBeforeAt);
+      } else {
+        navigation.navigate('Login');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
   let [fontLoaded]=useFonts({
     'Italic':require('../assets/fonts/AveriaSerifLibre-BoldItalic.ttf'),
     'LightItalic':require('../assets/fonts/AveriaSerifLibre-LightItalic.ttf'),
@@ -22,14 +39,6 @@ export default function MyProfile() {
   return (
    <>
     <ImageBackground source={require('../assets/images/background.png')} style={{width:400,}}>
-
-
-  
-
-
-
-
-      {/* top section  */}
 
       <View 
   style={{
@@ -70,7 +79,7 @@ export default function MyProfile() {
 <Image style={{height:132.123,width:126,flexShrink:0}} source={require('../assets/images/onemore.png')}/>
   <View>
     <Text style={{fontSize:25,fontStyle:'normal',color:'#FFEDDF',fontSize:35,
-    fontFamily:'Light',marginTop:30}}>Username</Text>
+    fontFamily:'Light',marginTop:30}}>{username}</Text>
     <Text style={{color:'#EEE3C8',
     fontFamily:'Light',fontStyle:'normal',fontSize:22}}>Designation</Text>
   </View>
@@ -102,25 +111,6 @@ export default function MyProfile() {
             </TouchableOpacity>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* input Section */}
-
 <View style={{width:400,height:400,backgroundColor:'#FFEDDF66',marginTop:60,borderTopRightRadius:50,}}>
 
   <View style={{display:'flex',flexDirection:'row',borderBottomWidth:2,borderBottomColor:'#CBB8B8',paddingBottom:10,width:300,alignSelf:'center'}}>
@@ -128,9 +118,6 @@ export default function MyProfile() {
   <Text style={{marginTop:8,fontStyle:'normal',fontSize:28,
     fontFamily:'Light',color:'#FFEDDF',}}>Recently Available</Text>
   </View>
-
-
-
 
   <TextInput 
             style={{
@@ -156,7 +143,6 @@ export default function MyProfile() {
             style={{
               width:370,alignSelf:'center',
               borderBottomWidth:2,borderBottomColor:'#CBB8B8',paddingBottom:10,
-              // width:398,
               backfaceVisibility:'hidden',
               opacity:0.4,
               marginVertical:0,
@@ -236,72 +222,6 @@ export default function MyProfile() {
   
 </View>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* </LinearGradient>     */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* footer */}
 
 
   </ImageBackground>

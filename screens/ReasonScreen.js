@@ -1,57 +1,36 @@
 import { View, Text ,Image,TextInput,TouchableOpacity,ImageBackground} from 'react-native'
-import {React,useState} from 'react'
-// import {LinearGradient} from 'expo-linear-gradient';
+import {React,useState,useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import RNPickerSelect from 'react-native-picker-select';
 import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'
 import { useNavigation } from '@react-navigation/native';
 import { firebase ,database} from '../config';
-// import { database } from '@react-native-firebase/database';
 
 export default function ReasonScreen() {
   const navigation =useNavigation();
     const [message, setmessage] = useState('');
     const [selectedValue, setSelectedValue] = useState(null);
     const [selectedValue2, setSelectedValue2] = useState(null);
+    const [username, setUsername] = useState('');
 
-
-
-
-
-
-
-
-
-    // handleDone = async () => {
-    //   if (message.trim() === '') {
-    //     alert('Please enter a message before submitting.');
-    //     return;
-    //   }
+    useEffect(() => {
+      const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // Extract the part before '@' from the email and set it as the username
+          const userEmail = user.email || '';
+          const usernamePartBeforeAt = userEmail.split('@')[0];
+          setUsername(usernamePartBeforeAt);
+        } else {
+          navigation.navigate('Login');
+        }
+      });
   
-    //   try {
-    //     // Push the message to the Firebase Realtime Database
-    //     await database().ref('messages').push({
-    //       text: message,
-    //       timestamp: database.ServerValue.TIMESTAMP,
-    //     });
-    //     alert('Message submitted successfully!');
-    //     setmessage('');
-    //   } catch (error) {
-    //     console.error('Error submitting message:', error);
-    //     alert('Failed to submit message. Please try again.');
-    //   }
-    // };
-
-
+      return () => unsubscribe();
+    }, []);
 
     const handleDone = async () => {
-      console.log('Firebase Database:', firebase.database()); // Debugging
-  
-      // if (message.trim() === '') {
-      //   alert('Please enter a message before submitting.');
-      //   return;
-      // }
+      console.log('Firebase Database:', firebase.database()); 
 
       if (!selectedValue || !selectedValue2 || message.trim() === '') {
         alert('Please fill in all fields before submitting.');
@@ -62,7 +41,7 @@ export default function ReasonScreen() {
 
         const user = firebase.auth().currentUser;
       const userEmail = user ? user.email : 'Unknown Email';
-        // Push the message to the Firebase Realtime Database
+        
         await firebase.database().ref('messages').push({
           availability: selectedValue,
         reason: selectedValue2,
@@ -77,9 +56,6 @@ export default function ReasonScreen() {
         alert('Failed to submit message. Please try again.');
       }
     };
-
-
-
     const placeholder = {
         label: 'Default',
       value: null,
@@ -88,7 +64,7 @@ export default function ReasonScreen() {
     const options = [
       { label: 'Avalaible', value: 'Avalaible' },
       { label: 'Not Avalaible', value: 'Not Avalaible' },
-      // { label: 'Wednesday', value: 'Wednesday' },
+      
     ];
 
     const placeholder2 = {
@@ -103,7 +79,7 @@ export default function ReasonScreen() {
         { label: 'Other', value: 'Other' },
       ];
 
-      // const navigation = useNavigation();
+     
 
       let [fontLoaded]=useFonts({
         'Italic':require('../assets/fonts/AveriaSerifLibre-BoldItalic.ttf'),
@@ -130,7 +106,6 @@ export default function ReasonScreen() {
           <Image style={{width:50,height:50}} source={require('../assets/images/newhero01.png')}/>
       
       <Text style={{
-          // fontFamily:'AveriaSerifLibre-Italic',
           color:'#450920',fontSize:40,
           fontFamily:'Light',marginTop:2}}
           className=" font-semibold  text-center">
@@ -146,23 +121,16 @@ export default function ReasonScreen() {
       
           </SafeAreaView>
         </View>
-      
-      
-      
-      
-      {/* main section */}
-      
+
       <View    style={{display:'flex',flexDirection:'row',gap:5,alignSelf:'center',marginVertical:40,}}>
       
       <Image style={{height:80,width:90,flexShrink:0,marginTop:20,}} source={require('../assets/images/onemore.png')}/>
         <View>
           <Text style={{fontSize:24,fontStyle:'normal',color:'#FFEDDF',marginTop:40, fontSize:40,
-    fontFamily:'Light',}}>Username</Text>
-          <Text style={{color:'#EEE3C8',fontWeight:400,fontStyle:'normal',fontSize:20}}></Text>
+    fontFamily:'Light',}}>{username}</Text>
+
         </View>
       </View>
-            
-   
     <View>
         <Text style={{marginLeft:80,color:'white',fontSize:25,
     fontFamily:'Light',marginVertical:4}}>Set Availability</Text>
@@ -178,7 +146,7 @@ export default function ReasonScreen() {
                 marginLeft:60,
                 flexShrink:0}}>
             <RNPickerSelect  
-            // style={{color:'white'}}
+
 
                 placeholder={placeholder}
                 items={options}
@@ -209,13 +177,6 @@ export default function ReasonScreen() {
             />
       </TouchableOpacity>
     </View>
-      
-      
-      
-      
-      
-      
-      
       <View>
         <Text style={{alignSelf:'center',fontSize:25,
     fontFamily:'Light',color:'#FFEDDF',marginTop:50}}>Leave a custom Message</Text>
@@ -226,7 +187,6 @@ export default function ReasonScreen() {
             style={{
                 width:370,alignSelf:'center',
                 borderBottomWidth:2,borderBottomColor:'#FFEDDF',paddingBottom:10,
-            //   width:400,
             backfaceVisibility:'hidden',
               opacity:0.8,
               marginVertical:15,
@@ -244,7 +204,7 @@ export default function ReasonScreen() {
       </View>
       
       <TouchableOpacity onPress={handleDone}
-        // onPress={()=> navigation.navigate('SignUp')}
+
         className="py-2 " style={{
             borderRadius:30,
             backgroundColor:'#FFEDDFF2',
@@ -263,34 +223,6 @@ export default function ReasonScreen() {
                 Done
             </Text>
     </TouchableOpacity>
-      
-      
-      
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-       
-      
-      
-      
-      
-      {/* </LinearGradient>     */}
-      
-      
-      
-            
-      
-      
-      
-      
-      
       {/* footer */}
       
       

@@ -1,16 +1,35 @@
 import { View, Text ,Image,TextInput,TouchableOpacity, ImageBackground} from 'react-native'
 import React,{useState,useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useFonts } from 'expo-font'
 import { useNavigation } from '@react-navigation/native'
 import { firebase } from '../config';
+import { LearnMoreLinks } from 'react-native/Libraries/NewAppScreen';
 
 
 export default function ProfileScreen() {
   const navigation =useNavigation();
   const [name,setName]=useState('');
+  const [institute,setinstitute]=useState('');
+  const [department,setdepartment]=useState('');
 
+  const handleSave = () => {
+    // Get a reference to the Firebase database
+    const db = firebase.database();
 
+    // Create a new entry in the 'users' collection with the provided data
+    db.ref('Users Information').push({
+      name: name,
+      institute: institute,
+      department: department,
+    })
+    .then(() => {
+      alert('Data saved successfully!');
+      setName(''),setdepartment(''),setinstitute('');
+    })
+    .catch((error) => {
+      alert('Error saving data:');
+    });
+  };
 
   const handleLogout = async () => {
     try {
@@ -20,18 +39,6 @@ export default function ProfileScreen() {
       console.error('Logout error');
     }
   };
-
-  // let [fontLoaded]=useFonts({
-  //   'Italic':require('../assets/fonts/AveriaSerifLibre-BoldItalic.ttf'),
-  //   'LightItalic':require('../assets/fonts/AveriaSerifLibre-LightItalic.ttf'),
-  //   'Light':require('../assets/fonts/AveriaSerifLibre-Light.ttf')
-    
-  // })
-
-
-  // if(!fontLoaded){
-  //   return <AppLoading/>
-  // }
   return (
     <>
     <ImageBackground source={require('../assets/images/background.png')} style={{height:800}}>
@@ -66,9 +73,6 @@ export default function ProfileScreen() {
 
 
 
-{/* profile photo */}
-
-
 
 <View style={{alignSelf:'center'}}>
 
@@ -77,7 +81,6 @@ export default function ProfileScreen() {
 
 </View>
 
-{/* informations */}
 
 <View    
 
@@ -98,7 +101,9 @@ style={{width:295,height:355,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
             }}
               className="myhaseeb text-white  font-semibold rounded-2xl"
               placeholder="Name"
-              value="Name" 
+              value={name} 
+              onChangeText={(name)=>setName(name)}
+              
             />
 
             
@@ -118,7 +123,8 @@ style={{width:295,height:355,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
             }}
               className="myhaseeb text-white font-semibold rounded-2xl "
               placeholder="Institute"
-              value="Institute" 
+              value={institute}
+              onChangeText={(institute)=>{setinstitute(institute)}}
             />
 
           <TextInput 
@@ -138,25 +144,23 @@ style={{width:295,height:355,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
               // className="p-4 bg-grey-100 text-gray-700 rounded-2xl"
               className="myhaseeb text-white font-semibold rounded-2xl"
               placeholder="Department"
-              value="Department" 
+              value={department} 
+              onChangeText={(department)=>{setdepartment(department)}}
             />
 
 
 
- {/* save and edit button */}
 
 <View  
             style={{display:'flex',gap:100,flexDirection:'row',marginLeft:13, position: 'relative', bottom: 0 }}
             >
 
 <TouchableOpacity
-        // onPress={()=> navigation.navigate('SignUp')}
         className="py-2  " style={{
             borderRadius:30,
             backgroundColor:'#450920',
             width:83,
             height:39,
-            // marginLeft:60,
             flexShrink:0}}>
             <Text 
                 className=" font-semibold text-center " style={{ 
@@ -169,7 +173,7 @@ style={{width:295,height:355,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
             </Text>
     </TouchableOpacity>
     <TouchableOpacity
-        onPress={()=> navigation.navigate('SignUp')}
+        onPress={handleSave}
         className="py-2 " style={{
             borderRadius:30,
             backgroundColor:'#450920',
@@ -195,18 +199,6 @@ style={{width:295,height:355,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
 
 
 </View>
-
-
-
-
-
-
-
-
-
-
-{/* </LinearGradient> */}
-
 <View 
   style={{
     width:394,
