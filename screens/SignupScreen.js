@@ -195,3 +195,13 @@ style={{ flex: 1 }}
 </LinearGradient>
   )
 }
+
+// alert('User Registered', 'Registration successful');
+// } catch (error) {
+//   console.error('Registration error:', error);
+//   alert('Registration failed', 'Please try again.');
+// }
+
+
+// checking checking 
+// };
