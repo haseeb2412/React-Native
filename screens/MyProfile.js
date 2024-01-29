@@ -10,14 +10,24 @@ import { firebase ,database} from '../config';
 export default function MyProfile() {
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
+  const [availability, setAvailability] = useState('');
+
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // Extract the part before '@' from the email and set it as the username
         const userEmail = user.email || '';
         const usernamePartBeforeAt = userEmail.split('@')[0];
         setUsername(usernamePartBeforeAt);
+        const messagesRef = firebase.database().ref('messages');
+        messagesRef.once('value', (snapshot) => {
+          snapshot.forEach((childSnapshot) => {
+            const messageData = childSnapshot.val();
+            if (messageData.email === userEmail) {
+              setAvailability(messageData.availability || 'Not Available');
+            }
+          });
+        });
       } else {
         navigation.navigate('Login');
       }
@@ -25,6 +35,14 @@ export default function MyProfile() {
 
     return () => unsubscribe();
   }, []);
+
+
+  
+
+
+
+
+
   let [fontLoaded]=useFonts({
     'Italic':require('../assets/fonts/AveriaSerifLibre-BoldItalic.ttf'),
     'LightItalic':require('../assets/fonts/AveriaSerifLibre-LightItalic.ttf'),
@@ -106,7 +124,7 @@ export default function MyProfile() {
                             
                         }}
                     >
-                        AVAILABILITY
+                        {availability}
                     </Text>
             </TouchableOpacity>
 

@@ -57,3 +57,7 @@ export default function AppNavigation() {
     </NavigationContainer>
   )
 }
+
+// </Stack.Navigator>
+// </NavigationContainer>
+// )
