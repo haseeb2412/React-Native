@@ -205,3 +205,34 @@ style={{ flex: 1 }}
 
 // checking checking 
 // };
+
+
+// alert('User Registered', 'Registration successful');
+// } catch (error) {
+//   console.error('Registration error:', error);
+//   alert('Registration failed', 'Please try again.');
+// }
+
+
+// checking checking 
+// };
+
+// alert('User Registered', 'Registration successful');
+// } catch (error) {
+//   console.error('Registration error:', error);
+//   alert('Registration failed', 'Please try again.');
+// }
+
+
+// checking checking 
+// };
+
+// alert('User Registered', 'Registration successful');
+// } catch (error) {
+//   console.error('Registration error:', error);
+//   alert('Registration failed', 'Please try again.');
+// }
+
+
+// checking checking 
+// };
