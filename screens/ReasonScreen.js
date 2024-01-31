@@ -28,33 +28,52 @@ export default function ReasonScreen() {
       return () => unsubscribe();
     }, []);
 
+
     const handleDone = async () => {
-      console.log('Firebase Database:', firebase.database()); 
-
-      if (!selectedValue || !selectedValue2 || message.trim() === '') {
-        alert('Please fill in all fields before submitting.');
-        return;
-      }
-  
+    
       try {
-
         const user = firebase.auth().currentUser;
-      const userEmail = user ? user.email : 'Unknown Email';
+        const userEmail = user ? user.email : 'Unknown Email';
+
+        const uid = user.uid;
+
+        const userInformationRef = firebase.database().ref('userInformation/' + uid);
+
+        const messagesRef = userInformationRef.child('messages');
         
-        await firebase.database().ref('messages').push({
-          availability: selectedValue,
-        reason: selectedValue2,
-        email: userEmail,
-          text: message,
-          timestamp: firebase.database.ServerValue.TIMESTAMP,
-        });
+        const messagesSnapshot = await messagesRef.once('value');
+        const messagesData = messagesSnapshot.val();
+    
+        if (messagesData) {
+          
+          const messageId = Object.keys(messagesData)[0]; 
+          await messagesRef.child(messageId).update({
+            availability: selectedValue,
+            reason: selectedValue2,
+            email: userEmail,
+            text: message,
+          });
+        } else {
+          
+          await messagesRef.push({
+            availability: selectedValue,
+            reason: selectedValue2,
+            email: userEmail,
+            text: message,
+          });
+        }
+    
         alert('Message submitted successfully!');
-        setmessage(''),setSelectedValue(''),setSelectedValue2('');
+        setmessage(''), setSelectedValue(''), setSelectedValue2('');
       } catch (error) {
-        console.error('Error submitting message:', error);
+        // console.error('Error submitting message:', error);
         alert('Failed to submit message. Please try again.');
       }
     };
+    
+
+
+
     const placeholder = {
         label: 'Default',
       value: null,

@@ -12,34 +12,36 @@ export default function MyProfile() {
   const [username, setUsername] = useState('');
   const [availability, setAvailability] = useState('');
 
-
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const userEmail = user.email || '';
         const usernamePartBeforeAt = userEmail.split('@')[0];
         setUsername(usernamePartBeforeAt);
-        const messagesRef = firebase.database().ref('messages');
-        messagesRef.once('value', (snapshot) => {
-          snapshot.forEach((childSnapshot) => {
-            const messageData = childSnapshot.val();
-            if (messageData.email === userEmail) {
-              setAvailability(messageData.availability || 'Not Available');
-            }
-          });
+  
+        const uid = user.uid;
+        const userInformationRef = firebase.database().ref('userInformation/' + uid);
+
+        userInformationRef.once('value', (snapshot) => {
+          const userData = snapshot.val();
+  
+          if (userData && userData.messages) {
+            const messageId = Object.keys(userData.messages)[0];
+            const firstMessage = userData.messages[messageId];
+            setAvailability(firstMessage.availability || 'Not Available');
+          } else {
+            setAvailability('Not Available');
+          }
         });
       } else {
+        setUsername(''); 
         navigation.navigate('Login');
       }
     });
-
+  
     return () => unsubscribe();
   }, []);
-
-
   
-
-
 
 
 

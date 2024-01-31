@@ -16,30 +16,51 @@ export default function SignUpScreen() {
     const [password,setPassword]=useState('');
 
 
-
-
-
     const registerUser = async () => {
       try {
         const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
         const user = userCredential.user;
-  
-  
+
+        const uid = user.uid;
+    
         await user.updateProfile({
-          // displayName: name,
         });
-  
-        await firebase.firestore().collection('users').doc(user.uid).set({
-          // name,
+    
+        await firebase.firestore().collection('users').doc(uid).set({
           email,
-        });async
-  
+        });
+    
+        // console.log('User UID:', uid);
+    
         alert('User Registered', 'Registration successful');
       } catch (error) {
-        console.error('Registration error:', error);
+        // console.error('Registration error:', error);
         alert('Registration failed', 'Please try again.');
       }
     };
+
+
+    // const registerUser = async () => {
+    //   try {
+    //     const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+    //     const user = userCredential.user;
+  
+  
+    //     await user.updateProfile({
+    //       // displayName: name,
+    //     });
+  
+    //     await firebase.firestore().collection('users').doc(user.uid).set({
+    //       // name,
+    //       email,
+    //     });async
+  
+    //     alert('User Registered', 'Registration successful');
+    //   } catch (error) {
+    //     console.error('Registration error:', error);
+    //     alert('Registration failed', 'Please try again.');
+    //   }
+    // };
 
 
 
@@ -196,43 +217,4 @@ style={{ flex: 1 }}
   )
 }
 
-// alert('User Registered', 'Registration successful');
-// } catch (error) {
-//   console.error('Registration error:', error);
-//   alert('Registration failed', 'Please try again.');
-// }
 
-
-// checking checking 
-// };
-
-
-// alert('User Registered', 'Registration successful');
-// } catch (error) {
-//   console.error('Registration error:', error);
-//   alert('Registration failed', 'Please try again.');
-// }
-
-
-// checking checking 
-// };
-
-// alert('User Registered', 'Registration successful');
-// } catch (error) {
-//   console.error('Registration error:', error);
-//   alert('Registration failed', 'Please try again.');
-// }
-
-
-// checking checking 
-// };
-
-// alert('User Registered', 'Registration successful');
-// } catch (error) {
-//   console.error('Registration error:', error);
-//   alert('Registration failed', 'Please try again.');
-// }
-
-
-// checking checking 
-// };
