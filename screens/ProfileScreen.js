@@ -11,25 +11,35 @@ export default function ProfileScreen() {
   const [name,setName]=useState('');
   const [institute,setinstitute]=useState('');
   const [department,setdepartment]=useState('');
+  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue2, setSelectedValue2] = useState(null);
 
-  const handleSave = () => {
-    // Get a reference to the Firebase database
-    const db = firebase.database();
 
-    // Create a new entry in the 'users' collection with the provided data
-    db.ref('Users Information').push({
+const handleSave = async () => {
+
+  try {
+    const user = firebase.auth().currentUser;
+    const userEmail = user ? user.email : 'Unknown Email';
+
+    const uid = user.uid;
+    const userInformationRef = firebase.database().ref('userInformation/' + uid);
+
+    await userInformationRef.update({
       name: name,
       institute: institute,
       department: department,
-    })
-    .then(() => {
-      alert('Data saved successfully!');
-      setName(''),setdepartment(''),setinstitute('');
-    })
-    .catch((error) => {
-      alert('Error saving data:');
+
     });
-  };
+
+    alert('Data saved successfully!');
+    setName(''), setdepartment(''), setinstitute('');
+
+  } catch (error) {
+    // console.error('Error saving data:', error);
+    alert('Failed to save data. Please try again.');
+  }
+};
+
 
   const handleLogout = async () => {
     try {
