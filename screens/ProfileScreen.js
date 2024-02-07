@@ -247,3 +247,26 @@ style={{width:295,height:355,backgroundColor:'#F4BEBE',borderRadius:28,alignSelf
     
   )
 }
+
+
+//   <Image source={require('../assets/images/newhero01.png')} style={{width:68,height:68,overflow:'visible',position:'relative',top:-50}} />
+// </TouchableOpacity>
+
+// <TouchableOpacity onPress={() => navigation.navigate('Reason')}>
+//   <Image source={require('../assets/images/contact.png')} style={{width:50,height:40,marginLeft:15,bottom:25,}} />
+// </TouchableOpacity>
+
+//     </SafeAreaView>
+//   </View>
+
+
+
+//   </ImageBackground>
+
+// </>
+
+
+    
+//   )
+// }
+
